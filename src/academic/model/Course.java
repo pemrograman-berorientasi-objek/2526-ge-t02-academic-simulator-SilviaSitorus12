@@ -1,38 +1,57 @@
 package academic.model;
-//Silvia Eklesiana Sitorus 12S24004
 
+/**
+ * @author 12S24004 - Silvia Sitorus
+ */
 public class Course {
-    private String nim;
+    private String code;
     private String name;
-    private int credit;
+    private int credits;
     private String grade;
 
-    public Course(String nim, String name, int credit, String grade) {
-        this.nim = nim;
+    public Course(String code, String name, int credits, String grade) {
+        this.code = code;
         this.name = name;
-        this.credit = credit;
+        this.credits = credits;
         this.grade = grade;
     }
 
-    // Getters for all attributes
-    public String getNim() {
-        return nim;
+    // Getter methods for all fields
+    public String getCode() {
+        return code;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getCredit() {
-        return credit;
+    public int getCredits() {
+        return credits;
     }
 
     public String getGrade() {
         return grade;
     }
 
+    // Optional: Setter methods if needed, but not explicitly requested
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
     @Override
     public String toString() {
-        return nim + "|" + name + "|" + credit + "|" + grade;
+        return code + "|" + name + "|" + credits + "|" + grade;
     }
 }

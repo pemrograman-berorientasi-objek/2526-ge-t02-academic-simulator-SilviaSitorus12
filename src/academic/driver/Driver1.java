@@ -1,52 +1,49 @@
 package academic.driver;
 
-//Silvia Eklesiana Sitorus 12S24004
-
+/**
+ * @author 12S24004 - Silvia Sitorus
+ */
 import academic.model.Course;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Scanner; // Using ArrayList for dynamic array, as raw array size is unknown beforehand
 
 public class Driver1 {
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        // Menggunakan array standar Java untuk menyimpan objek Course.
-        // Asumsi kapasitas awal, bisa diperluas jika diperlukan,
-        // namun untuk kesederhanaan sesuai prompt, kita mulai dengan ukuran yang cukup besar.
-        Course[] courses = new Course[100]; 
-        int courseCount = 0; // Untuk melacak jumlah objek Course yang disimpan
+        Scanner input = new Scanner(System.in);
+        ArrayList<Course> courses = new ArrayList<>(); // Use ArrayList for dynamic size
 
         String line;
-        while (scanner.hasNextLine()) {
-            line = scanner.nextLine();
+        while (input.hasNextLine()) {
+            line = input.nextLine();
+
             if (line.equals("---")) {
-                break; // Keluar dari loop jika input adalah "---"
+                break; // Stop reading when "---" is encountered
             }
 
-            // Parsing input dengan format nim#name#credit#grade
-            String[] parts = line.split("#");
-            if (parts.length == 4) {
-                String nim = parts[0];
-                String name = parts[1];
-                int credit = Integer.parseInt(parts[2]);
-                String grade = parts[3];
+            // Split the input line into 4 segments
+            String[] segments = line.split("#");
 
-                // Membuat objek Course baru dan menyimpannya dalam array
-                if (courseCount < courses.length) {
-                    courses[courseCount] = new Course(nim, name, credit, grade);
-                    courseCount++;
-                } else {
-                    System.err.println("Peringatan: Kapasitas array penuh, tidak dapat menambahkan course baru.");
-                    // Implementasi yang lebih kompleks akan melibatkan resizing array di sini.
-                }
+            if (segments.length == 4) {
+                String code = segments[0];
+                String name = segments[1];
+                int credits = Integer.parseInt(segments[2]); // Convert credits to integer
+                String grade = segments[3];
+
+                // Create a new Course object and add it to the list
+                Course course = new Course(code, name, credits, grade);
+                courses.add(course);
             } else {
-                System.err.println("Peringatan: Format input tidak valid untuk baris: " + line);
+                // Handle malformed input lines if necessary (optional, as not explicitly requested)
+                System.err.println("Invalid input format: " + line + ". Skipping.");
             }
         }
 
-        // Menampilkan semua objek Course yang telah disimpan
-        for (int i = 0; i < courseCount; i++) {
-            System.out.println(courses[i].toString());
+        // After reading all input, display all stored courses
+        for (Course course : courses) {
+            System.out.println(course); // Uses the overridden toString() method in Course class
         }
 
-        scanner.close();
+        input.close(); // Close the scanner
     }
 }

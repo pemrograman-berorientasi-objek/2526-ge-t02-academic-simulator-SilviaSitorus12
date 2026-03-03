@@ -1,25 +1,36 @@
 package academic.model;
 
-//Silvia Eklesiana Sitorus 12S24004
-
+/**
+ * @author 12S24004 - Silvia Sitorus
+ 
+ */
 public class Enrollment {
-    private String courseId;
+    private String courseCode;
     private String studentNim;
     private String academicYear;
     private String semester;
-    private String grade; // Default grade is "None"
+    private String grade; // Default to "None" based on output example
 
-    public Enrollment(String courseId, String studentNim, String academicYear, String semester) {
-        this.courseId = courseId;
+    public Enrollment(String courseCode, String studentNim, String academicYear, String semester) {
+        this.courseCode = courseCode;
         this.studentNim = studentNim;
         this.academicYear = academicYear;
         this.semester = semester;
         this.grade = "None"; // Default grade as per output example
     }
 
-    // Getters
-    public String getCourseId() {
-        return courseId;
+    // Optional constructor if grade is provided directly upon creation
+    public Enrollment(String courseCode, String studentNim, String academicYear, String semester, String grade) {
+        this.courseCode = courseCode;
+        this.studentNim = studentNim;
+        this.academicYear = academicYear;
+        this.semester = semester;
+        this.grade = grade;
+    }
+
+    // Getter methods for all fields
+    public String getCourseCode() {
+        return courseCode;
     }
 
     public String getStudentNim() {
@@ -38,13 +49,13 @@ public class Enrollment {
         return grade;
     }
 
-    // Optional: Setter for grade if it can be updated later
+    // Optional: Setter methods if needed, for example to update grade later
     public void setGrade(String grade) {
         this.grade = grade;
     }
 
     @Override
     public String toString() {
-        return courseId + "|" + studentNim + "|" + academicYear + "|" + semester + "|" + grade;
+        return courseCode + "|" + studentNim + "|" + academicYear + "|" + semester + "|" + grade;
     }
 }

@@ -1,61 +1,49 @@
 package academic.driver;
 
-//Silvia Eklesiana Sitorus 12S24004
-
 import academic.model.Student;
-import java.util.Scanner;
-import java.util.Arrays; // Untuk membuat array lebih besar jika diperlukan
+import java.util.ArrayList;
+import java.util.Scanner; // Menggunakan ArrayList untuk array dinamis
 
+/**
+ * @author 12S24004 - Silvia Sitorus
+ */
 public class Driver2 {
 
-    private static final int INITIAL_CAPACITY = 10; // Kapasitas awal array
-    private static Student[] students = new Student[INITIAL_CAPACITY];
-    private static int studentCount = 0;
+    public static void main(String[] _args) {
+        Scanner input = new Scanner(System.in);
+        ArrayList<Student> students = new ArrayList<>(); // Gunakan ArrayList untuk ukuran yang dinamis
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         String line;
+        while (input.hasNextLine()) {
+            line = input.nextLine();
 
-        System.out.println("Masukkan data Student (nim#name#year#studyprogram). Ketik '---' untuk berhenti:");
-
-        while (scanner.hasNextLine() && !(line = scanner.nextLine()).equals("---")) {
-            if (line.trim().isEmpty()) {
-                continue; // Lewati baris kosong
+            if (line.equals("---")) {
+                break; // Berhenti membaca saat "---" ditemukan
             }
 
-            String[] parts = line.split("#");
-            if (parts.length == 4) {
-                try {
-                    String nim = parts[0];
-                    String name = parts[1];
-                    int year = Integer.parseInt(parts[2]);
-                    String studyProgram = parts[3];
+            // Pisahkan baris input menjadi 4 segmen
+            String[] segments = line.split("#");
 
-                    Student student = new Student(nim, name, year, studyProgram);
-                    addStudent(student);
-                } catch (NumberFormatException e) {
-                    System.err.println("Error: Format tahun tidak valid pada baris: " + line);
-                }
+            if (segments.length == 4) {
+                String nim = segments[0];
+                String name = segments[1];
+                int enrollmentYear = Integer.parseInt(segments[2]); // Konversi tahun masuk ke integer
+                String major = segments[3];
+
+                // Buat objek Student baru dan tambahkan ke daftar
+                Student student = new Student(nim, name, enrollmentYear, major);
+                students.add(student);
             } else {
-                System.err.println("Error: Format input tidak sesuai (nim#name#year#studyprogram) pada baris: " + line);
+                // Penanganan untuk format input yang salah (opsional, tidak diminta secara eksplisit)
+                System.err.println("Invalid input format: " + line + ". Skipping.");
             }
         }
 
-        System.out.println("\n--- Data Student yang tersimpan ---");
-        for (int i = 0; i < studentCount; i++) {
-            System.out.println(students[i]);
+        // Setelah semua input dibaca, tampilkan semua student yang tersimpan
+        for (Student student : students) {
+            System.out.println(student); // Menggunakan metode toString() yang di-override di kelas Student
         }
-        
-        scanner.close();
-    }
 
-    // Metode untuk menambahkan Student ke array, dengan kemampuan resize
-    private static void addStudent(Student student) {
-        if (studentCount == students.length) {
-            // Array penuh, gandakan ukurannya
-            students = Arrays.copyOf(students, students.length * 2);
-            System.out.println("Kapasitas array Student diperbesar menjadi: " + students.length);
-        }
-        students[studentCount++] = student;
+        input.close(); // Tutup scanner
     }
 }

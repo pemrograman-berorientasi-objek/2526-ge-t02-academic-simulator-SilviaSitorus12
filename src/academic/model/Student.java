@@ -1,21 +1,22 @@
 package academic.model;
 
-//Silvia Eklesiana Sitorus 12S24004
-
+/**
+ * @author 12S24004 - Silvia Sitorus
+ */
 public class Student {
     private String nim;
     private String name;
-    private int year;
-    private String studyProgram;
+    private int enrollmentYear;
+    private String major;
 
-    public Student(String nim, String name, int year, String studyProgram) {
+    public Student(String nim, String name, int enrollmentYear, String major) {
         this.nim = nim;
         this.name = name;
-        this.year = year;
-        this.studyProgram = studyProgram;
+        this.enrollmentYear = enrollmentYear;
+        this.major = major;
     }
 
-    // Getters
+    // Getter methods for all fields
     public String getNim() {
         return nim;
     }
@@ -24,18 +25,33 @@ public class Student {
         return name;
     }
 
-    public int getYear() {
-        return year;
+    public int getEnrollmentYear() {
+        return enrollmentYear;
     }
 
-    public String getStudyProgram() {
-        return studyProgram;
+    public String getMajor() {
+        return major;
     }
 
-    // Setter (jika diperlukan, untuk contoh ini tidak ada setter untuk mengubah data)
+    // Optional: Setter methods if needed
+    public void setNim(String nim) {
+        this.nim = nim;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEnrollmentYear(int enrollmentYear) {
+        this.enrollmentYear = enrollmentYear;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
     @Override
     public String toString() {
-        return nim + "|" + name + "|" + year + "|" + studyProgram;
+        return nim + "|" + name + "|" + enrollmentYear + "|" + major;
     }
 }
